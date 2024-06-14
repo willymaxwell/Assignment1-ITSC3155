@@ -80,10 +80,32 @@ class SandwichMachine:
             self.machine_resources[item] -= order_ingredients[item]
         print(f"{sandwich_size} sandwich is ready. Bon appetit!")
 
- def report(self):
+    def report(self):
         """Show current resource values"""
         print("Current resources:")
         for item in self.machine_resources:
             print(f"{item.capitalize()}: {self.machine_resources[item]} slice(s)")
 
 ### Make an instance of SandwichMachine class and write the rest of the codes ###
+def main():
+    machine = SandwichMachine(resources)
+
+    while True:
+        choice = input("What would you like? (small/ medium/ large/ off/ report): ").lower()
+
+        if choice == "off":
+            break
+        elif choice == "report":
+            machine.report()
+        elif choice in recipes:
+            sandwich = recipes[choice]
+            if machine.check_resources(sandwich["ingredients"]):
+                coins_inserted = machine.process_coins()
+                if machine.transaction_result(coins_inserted, sandwich["cost"]):
+                    machine.make_sandwich(choice, sandwich["ingredients"])
+        else:
+            print("Invalid selection. Please choose again.")
+
+
+if __name__ == "__main__":
+    main()
