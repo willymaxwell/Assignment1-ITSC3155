@@ -80,4 +80,10 @@ class SandwichMachine:
             self.machine_resources[item] -= order_ingredients[item]
         print(f"{sandwich_size} sandwich is ready. Bon appetit!")
 
+ def report(self):
+        """Show current resource values"""
+        print("Current resources:")
+        for item in self.machine_resources:
+            print(f"{item.capitalize()}: {self.machine_resources[item]} slice(s)")
+
 ### Make an instance of SandwichMachine class and write the rest of the codes ###
